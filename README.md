@@ -1,4 +1,13 @@
-# Simple Oak Product
+# Hexagonal
+
+Este é um projeto simples que eu desenvolvi utilizando as arquiteturas de Ports and Adapters e Domain-Driven Design.
+
+## Observações
+
+
+Achei essa arquitetura muito parecida com a Clean Architecture, pois ela foca na ideia de manter nosso domínio livre de frameworks. Os ports são interfaces e os adapters são componentes que implementam a lógica. Além disso, existem os inbounds e outbounds, que são recursos responsáveis pela comunicação interna e externa do sistema.
+
+## Execução
 
 1. Instale as dependências:
 
@@ -44,11 +53,5 @@ Clone ou baixe os arquivos do repositório. Em seguida, siga os passos abaixo pa
 
 Certifique-se de ter o Angular na versão 17 instalado em seu sistema.
 
-# Imagens
 
-![Imagem 1](/docs/1.png)
-
-![Image 2](/docs/2.png)
-
-![Imagem 3](/docs/3.png)
 
