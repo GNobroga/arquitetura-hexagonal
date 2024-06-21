@@ -4,6 +4,8 @@ import static org.mockito.AdditionalAnswers.returnsFirstArg;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
+import java.math.BigDecimal;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,7 +31,7 @@ public class CreateProductUseCaseTest {
     
     @BeforeEach
     void setup() {
-        product = new Product(1L, "Smartphone", "No description", true);
+        product = new Product(1L, "Smartphone", "No description", true, new BigDecimal(10000), "dsdsd");
     }
 
     @Test

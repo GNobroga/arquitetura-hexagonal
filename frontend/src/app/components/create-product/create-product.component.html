@@ -1,0 +1,57 @@
+<div class="p-4 bg">
+    <form [formGroup]="form" (ngSubmit)="save()">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="fs-5">Novo</h1>
+        <button class="btn" (click)="modal.dismiss()">
+          <i class="bi bi-x-circle-fill fs-4 text-white"></i>
+        </button>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" formControlName="name">
+        <label for="floatingInput">Nome</label>
+      </div>
+      @if (form.controls.name.invalid && form.controls.name.touched) {
+        <div style="position: relative; bottom: 0.5rem;" class="text-danger text-sm">
+          {{ validate('name') }}
+        </div>
+      }
+      <div class="form-floating">
+        <textarea style="min-height: 100px;" class="form-control" id="floatingDescription" placeholder="" formControlName="description"></textarea>
+        <label for="floatingDescription">Descrição</label>
+      </div>
+      @if (form.controls.description.invalid && form.controls.description.touched) {
+        <div class="text-danger text-sm">
+          {{ validate('description') }}
+        </div>
+      }
+      <div class="form-floating mb-3 mt-3">
+        <input type="text" class="form-control" id="floatingInput" placeholder="" formControlName="imageUrl">
+        <label for="floatingInput">Imagem URL</label>
+      </div>
+      @if (form.controls.imageUrl.invalid && form.controls.imageUrl.touched) {
+        <div style="position: relative; bottom: 0.5rem;" class="text-danger text-sm">
+          {{ validate('imageUrl') }}
+        </div>
+      }
+      <div class="input-group mb-3 has-validation">
+        <div class="form-floating">
+          <input type="number" class="form-control" id="floatingInputGroup1" placeholder="R$ 0,00" formControlName="price">
+          <label for="floatingInputGroup1">Preço</label>
+        </div>
+      </div>
+      @if (form.controls.price.invalid && form.controls.price.touched) {
+        <div style="position: relative; bottom: 0.5rem;" class="text-danger text-sm">
+          {{ validate('price') }}
+        </div>
+      }
+
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked formControlName="available">
+        <label class="form-check-label text-white" for="flexCheckChecked">
+          Disponível em Estoque?
+        </label>
+      </div>
+      <button class="btn btn-light btn-lg w-100 mt-3">Salvar</button>
+  </form>
+</div>
+

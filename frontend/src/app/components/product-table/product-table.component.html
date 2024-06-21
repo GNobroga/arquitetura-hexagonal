@@ -1,0 +1,88 @@
+<form class="border shadow mt-4 rounded bg">
+	<div class="mb-1 p-2 pt-4 px-3 d-flex gap-2">
+		<div class="flex-grow-1">
+      <div class="form-floating mb-3">
+        <input
+          id="floatingPassword"
+          type="text"
+          class="form-control form-control-lg w-100"
+            placeholder="Pesquisar"
+            #searchInput
+          (input)="search.set(searchInput.value)"
+          >
+          <label>Pesquisar</label>
+      </div>
+		</div>
+    <div>
+      <button class="btn btn-link  rounded-pill" (click)="create()">
+        <i class="bi bi-plus-circle-fill text-white fs-3"></i>
+      </button>
+    </div>
+
+	</div>
+  <div class="col-2 ms-auto me-2  gap-3 ">
+    <div class="mb-2">Ordenar por: </div>
+    <select class="form-select" name="order" (input)="changeSort()">
+      <option value="asc">Menor preço</option>
+      <option value="desc">Maior preço</option>
+    </select>
+  </div>
+
+	<div class="p-3">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Descrição</th>
+          <th scope="col">Imagem</th>
+          <th scope="col">Preço</th>
+          <th scope="col">Status</th>
+          <th scope="col">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (product of products; track product.id) {
+          <tr>
+            <th scope="row">{{ product.id }}</th>
+            <td>{{ product.name }}</td>
+            <td>{{ product.description }}</td>
+            <td>
+              <img
+                [src]="product.imageUrl"
+                [alt]="'Imagem do ' + product.name "
+                class="me-2"
+                style="width: 100px"
+              />
+
+            </td>
+            <td>{{ product.price | currency: 'BRL' }}</td>
+            <td [class]="{ 'text-danger': !product.available, 'text-success': product.available}">{{ getStatus(product.available) }}</td>
+            <td>
+              <div>
+                <button class="btn btn-danger rounded-pill" (click)="confirmDeletion(product.id)">
+                  <i class="bi bi-trash-fill"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="7" style="text-align: center">Não há mais produtos</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+  </div>
+	<div class="d-flex justify-content-end p-2 position-relative" style="bottom: 1rem;">
+		<div class="d-flex gap-2">
+      <span class="btn btn-light" (click)="previousPage()" [style]="{ opacity: currentPage() <= 0 ? '0.5' : '1' }">
+        <i class="bi bi-arrow-left"></i>
+      </span>
+      <span class="btn btn-light" (click)="nextPage()">
+        <i class="bi bi-arrow-right"></i>
+      </span>
+    </div>
+	</div>
+</form>

@@ -1,5 +1,7 @@
 package br.com.gabriel.hexagonal.adapter.inbound.entities;
 
+import java.math.BigDecimal;
+
 import br.com.gabriel.hexagonal.domain.entities.product.Product;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -24,12 +26,18 @@ public class ProductEntity extends BaseEntity {
 
     private boolean available;
 
+    private BigDecimal price;
+
+    private String imageUrl;
+
     public static ProductEntity from(Product product) {
         return ProductEntity.builder()
             .id(product.getId())
             .name(product.getName())
             .description(product.getDescription())
             .available(product.isAvailable())
+            .price(product.getPrice())
+            .imageUrl(product.getImageUrl())
             .build();
     }
 
@@ -38,6 +46,8 @@ public class ProductEntity extends BaseEntity {
             productEntity.getId(), 
             productEntity.getName(), 
             productEntity.getDescription(), 
-            productEntity.isAvailable());
+            productEntity.isAvailable(),
+            productEntity.getPrice(),
+            productEntity.getImageUrl());
     }
 }

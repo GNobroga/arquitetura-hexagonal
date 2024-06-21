@@ -42,7 +42,7 @@ public class ProductServiceAdapter implements ProductServicePort {
     @Override
     public Pagination<Product> findAll(final SearchCriteria criteria) {
         final var direction = "asc".equals(criteria.getSort()) ? Sort.Direction.ASC : Sort.Direction.DESC;
-        final var pageRequest = PageRequest.of(criteria.getPage(), criteria.getSize(), Sort.by(direction, "id"));
+        final var pageRequest = PageRequest.of(criteria.getPage(), criteria.getSize(), Sort.by(direction, "price"));
         final var page = repository.findAll(buildSearchSpec(criteria.getTerm()), pageRequest);
         final var products = page.getContent().stream().map(ProductEntity::toProduct).toList();
         return Pagination.with(page.getSize(),page.getNumber(), page.getTotalElements(), products);

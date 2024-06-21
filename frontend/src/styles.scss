@@ -1,1 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'bootstrap/scss/bootstrap';
+@import 'bootswatch/dist/pulse/bootswatch';
+
+.bg {
+  background: linear-gradient(to bottom, #325D88, #325d8898);
+  color: white;
+
+  input, label {
+    color: black;
+  }
+}
