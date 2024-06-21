@@ -1,0 +1,15 @@
+spring:
+    datasource:
+        url: jdbc:h2:mem:app
+        username: app
+        password:
+    h2:
+        console:
+            enabled: true
+    jpa:
+        hibernate:
+            ddl-auto: create
+        defer-datasource-initialization: true
+    sql:
+        init:
+            mode: always
