@@ -15,11 +15,11 @@ public record CreateProductRequest(
     @Length(min = 10, max = 255, message = "descrição deve estar entre 10 a 255 caracteres.")
     String description,
 
-    @NotNull(message = "product.available is required")
-    boolean available
+    @NotNull(message = "disponivel é obrigatório")
+    Boolean available
 ) {
 
-    public Product to() {
+    public Product toProduct() {
         return new Product(null, name(), description(), available());
     }
     

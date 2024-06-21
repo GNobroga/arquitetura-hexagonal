@@ -41,23 +41,23 @@ public class ProductServiceAdapter implements ProductServicePort {
 
     @Override
     public Pagination<Product> findAll(final SearchCriteria criteria) {
-        final var direction = "ASC".equals(criteria.getSort()) ? Sort.Direction.ASC : Sort.Direction.DESC;
+        final var direction = "asc".equals(criteria.getSort()) ? Sort.Direction.ASC : Sort.Direction.DESC;
         final var pageRequest = PageRequest.of(criteria.getPage(), criteria.getSize(), Sort.by(direction, "id"));
-        Specification<ProductEntity> spec = Specification.where(null);
-
-        if (Objects.nonNull(criteria.getTerm()) && !criteria.getTerm().isBlank()) {
-            spec = Specification.where((root, query, cb) -> {
-                final var predicate = cb.or(
-                    cb.like(root.get("name"), cb.literal("%" + criteria.getTerm() + "%")),
-                    cb.like(root.get("description"), cb.literal("%" + criteria.getTerm() + "%"))
-                );
-                return predicate;
-            });
-        }
-        
-        final var page = repository.findAll(spec, pageRequest);
-        final var products = page.getContent().stream().map(ProductEntity::to).toList();
+        final var page = repository.findAll(buildSearchSpec(criteria.getTerm()), pageRequest);
+        final var products = page.getContent().stream().map(ProductEntity::toProduct).toList();
         return Pagination.with(page.getSize(),page.getNumber(), page.getTotalElements(), products);
+    }
+
+    public Specification<ProductEntity> buildSearchSpec(String term) {
+        return (root, query, cb) -> {
+            if (Objects.isNull(term) || term.isBlank()) {
+                return cb.and();
+            }
+            return cb.or(
+                    cb.like(cb.lower(root.get("name")), cb.lower(cb.literal("%" + term + "%"))),
+                    cb.like(cb.lower(root.get("description")), cb.lower(cb.literal("%" + term + "%")))
+                );
+        };
     }
     
 }

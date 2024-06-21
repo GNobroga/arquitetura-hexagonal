@@ -33,7 +33,7 @@ public class ProductEntity extends BaseEntity {
             .build();
     }
 
-    public static Product to(ProductEntity productEntity) {
+    public static Product toProduct(ProductEntity productEntity) {
         return new Product(
             productEntity.getId(), 
             productEntity.getName(), 
